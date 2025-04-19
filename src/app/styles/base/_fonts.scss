@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('../../fonts/SFProDisplayBold.woff2') format('woff2'),
+    url('../../fonts/SFProDisplayBold.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('../../fonts/SFProDisplayRegular.woff2') format('woff2'),
+    url('../../fonts/SFProDisplayRegular.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url('../../fonts/SFProDisplayMedium.woff2') format('woff2'),
+    url('../../fonts/SFProDisplayMedium.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 600;
+  src:
+    url('../../fonts/SFProDisplaySemibold.woff2') format('woff2'),
+    url('../../fonts/SFProDisplaySemibold.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 800;
+  src:
+    url('../../fonts/SFProDisplayHeavy.woff2') format('woff2'),
+    url('../../fonts/SFProDisplayHeavy.woff') format('woff');
+  font-display: swap;
+}
