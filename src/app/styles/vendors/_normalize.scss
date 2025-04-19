@@ -1,0 +1,10 @@
+@import '/node_modules/modern-normalize/modern-normalize.css';
+
+// Body reset
+// 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+// 2. Change the default tap highlight to be completely transparent in iOS.
+
+html {
+  box-sizing: border-box; // 1
+  -webkit-tap-highlight-color: transparent; // 2
+}
