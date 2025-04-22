@@ -22,6 +22,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
+    "prettier-plugin-embed": "^0.5.0",
     "sass-embedded": "^1.86.3",
     "stylelint": "^16.18.0",
     "stylelint-config-prettier-scss": "^1.0.0",
