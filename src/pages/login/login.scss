@@ -1,0 +1,55 @@
+@use '@styles' as *;
+
+.login {
+  @include flex-center;
+
+  min-height: 100vh;
+  background-color: $color-gray-600;
+
+  &__container {
+    width: 100%;
+    max-width: rem(310);
+  }
+
+  &__title {
+    margin-bottom: rem(8);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    margin-top: rem(40);
+  }
+
+  &__eye-icon {
+    display: none;
+    cursor: pointer;
+  }
+
+  &__input[data-has-value] {
+    ~ .input__icon {
+      svg:not(.login__eye-icon) {
+        color: $color-primary-text;
+      }
+
+      .login__eye-icon {
+        display: block;
+      }
+    }
+  }
+
+  &__icon {
+    &--active {
+      color: $color-primary-text;
+    }
+
+    &--inactive {
+      color: $color-label-tertiary;
+    }
+  }
+
+  &__error-message {
+    margin-bottom: rem(16);
+  }
+}
