@@ -1,0 +1,78 @@
+@use '@styles' as *;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  &--visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-material-chromedark;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &--visible &__overlay {
+    opacity: 1;
+  }
+
+  &__container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    min-width: rem(300);
+    max-width: 90%;
+    max-height: 90vh;
+    padding: rem(24);
+    overflow: auto;
+    background-color: $color-background-primary;
+    border-radius: rem(8);
+    box-shadow:
+      0 20px 25px -5px rgb(0 0 0 / 10%),
+      0 8px 10px -6px rgb(0 0 0 / 10%);
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  &--visible &__container {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close-button {
+    position: absolute;
+    top: rem(8);
+    right: rem(8);
+    padding: rem(4);
+    font-size: rem(24);
+    line-height: 1;
+    color: $color-label-secondary;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &:hover {
+      color: $color-label-primary;
+    }
+  }
+
+  &__content {
+    margin-top: rem(16);
+  }
+}
