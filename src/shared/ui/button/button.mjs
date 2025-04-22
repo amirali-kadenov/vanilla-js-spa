@@ -7,7 +7,7 @@ import './button.scss'
  */
 
 /**
- * @typedef {'default' | 'full'} ButtonWidths
+ * @typedef {'default' | 'full' | 'content'} ButtonWidths
  */
 
 /**
@@ -18,6 +18,7 @@ import './button.scss'
  * @property {string} [className]
  * @property {boolean} [disabled=false]
  * @property {string} [type="primary"]
+ * @property {string} [dataAttributes]
  */
 
 /**
@@ -35,6 +36,7 @@ export const Button = (props) => {
       class="${resolvedClassName}"
       type="${props.type ?? 'button'}"
       ${props.disabled ? 'disabled' : ''}
+      ${resolveString(props.dataAttributes)}
     >
       ${props.children}
     </button>

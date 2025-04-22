@@ -11,7 +11,7 @@ export const getButtonClassName = ({
 }) => {
   return resolveString(
     'button',
-    `button--${width}`,
+    `button--width-${width}`,
     `button--${variant}`,
     disabled && 'button--disabled',
     className
