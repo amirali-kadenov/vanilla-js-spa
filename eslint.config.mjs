@@ -11,29 +11,6 @@ export default defineConfig([
     files: ['src/**/*.js', 'src/**/*.mjs'],
     plugins: { js },
     extends: ['js/recommended'],
-    rules: {
-      'import/order': [
-        'error',
-        {
-          groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
-          pathGroups: [
-            {
-              pattern: 'react',
-              group: 'external',
-            },
-            {
-              pattern: '@',
-              group: 'internal',
-            },
-          ],
-          pathGroupsExcludedImportTypes: ['internal'],
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true,
-          },
-        },
-      ],
-    },
   },
   {
     files: ['src/**/*.js', 'src/**/*.mjs'],
@@ -44,6 +21,22 @@ export default defineConfig([
     ...importPlugin.flatConfigs.errors,
     rules: {
       'import/no-unresolved': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: ['external', 'builtin', 'internal', 'parent', 'sibling', 'index'],
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'external',
+            },
+          ],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
     },
   },
   {
