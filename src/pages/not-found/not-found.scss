@@ -1,0 +1,11 @@
+@use '@styles' as *;
+
+.not-found {
+  @include flex-center;
+
+  flex-direction: column;
+  gap: rem(12);
+  min-height: 100vh;
+  padding-inline: rem(16);
+  background-color: $color-background-secondary;
+}
