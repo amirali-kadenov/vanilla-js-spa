@@ -1,0 +1,52 @@
+@use '@styles' as *;
+
+.button {
+  padding: rem(14px) rem(20px);
+  font-size: rem(17px);
+  font-weight: 400;
+  line-height: rem(22px);
+  cursor: pointer;
+  border: none;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &--link {
+    text-decoration: none;
+  }
+
+  &--primary {
+    color: $color-white;
+    background-color: $color-primary-text;
+  }
+
+  &--red {
+    color: $color-white;
+    background-color: $color-system-red;
+  }
+
+  &--clear {
+    color: $color-primary-text;
+    background-color: transparent;
+  }
+
+  &--large {
+    width: rem(316px);
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    background: $color-label-quaternary;
+  }
+}
