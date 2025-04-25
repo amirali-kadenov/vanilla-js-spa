@@ -1,4 +1,4 @@
-import { logout } from '@/features/auth/auth.mjs'
+import { Auth } from '@/features/auth/auth.mjs'
 import { Component } from '@/shared/model/component.mjs'
 import { Button } from '@/shared/ui/button/button.mjs'
 import { ExitIcon } from './icons/exit.mjs'
@@ -13,9 +13,9 @@ export class LogoutButton extends Component {
         const button = element.querySelector('button')
         if (!button) return
 
-        button.addEventListener('click', logout)
+        button.addEventListener('click', Auth.logout)
         return () => {
-          button.removeEventListener('click', logout)
+          button.removeEventListener('click', Auth.logout)
         }
       },
       render: () =>
