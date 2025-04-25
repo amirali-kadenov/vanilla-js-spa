@@ -23,6 +23,7 @@ import './input.scss'
  * @property {string} [className]
  * @property {string} [elementClassName]
  * @property {string} [autocomplete='off']
+ * @property {number} [maxLength]
  */
 
 /**

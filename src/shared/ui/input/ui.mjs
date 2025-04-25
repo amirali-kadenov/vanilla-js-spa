@@ -14,6 +14,7 @@ export const renderInput = ({
   rightIcon,
   value,
   className,
+  maxLength,
   autocomplete = 'off',
 }) => {
   const errorId = `${id}-error`
@@ -23,7 +24,8 @@ export const renderInput = ({
     value && `${DATA_HAS_VALUE_ATTRIBUTE}="true"`,
     error && `aria-describedby="${errorId}"`,
     autocomplete && `autocomplete="${autocomplete}"`,
-    placeholder && `placeholder="${placeholder}"`
+    placeholder && `placeholder="${placeholder}"`,
+    maxLength && `maxlength="${maxLength}"`
   )
 
   const resolvedClassName = resolveString(

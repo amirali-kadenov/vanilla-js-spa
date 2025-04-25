@@ -29,6 +29,7 @@ export function onInputMount(element) {
 
   input.addEventListener('change', handleChange)
   input.addEventListener('input', handleInput)
+
   return () => {
     input.removeEventListener('change', handleChange)
     input.removeEventListener('input', handleInput)
