@@ -1,4 +1,5 @@
 import { getIdGenerator } from '../lib/get-id-generatior.mjs'
+import { resolveString } from '../lib/resolve-string.mjs'
 
 /**
  * @typedef {Record<string, *>} PropsType
@@ -31,6 +32,7 @@ import { getIdGenerator } from '../lib/get-id-generatior.mjs'
  * @property {State} [initialState]
  * @property {RenderFunction<State, Props>} render
  * @property {MountFunction<State, Props>} [onMount]
+ * @property {string} [className]
  */
 
 const idGenerator = getIdGenerator()
@@ -51,7 +53,7 @@ export class Component {
   /**
    * @param {Options<State, Props>} options
    */
-  constructor({ props, initialState, render, onMount }) {
+  constructor({ props, initialState, render, onMount, className }) {
     const id = `${this.constructor.name}-${idGenerator.next().value}`
 
     /** @type {string} */
@@ -74,6 +76,9 @@ export class Component {
 
     /** @type {Props} */
     this.props = props ?? /** @type {Props} */ ({})
+
+    /** @type {string} */
+    this.className = className ?? ''
   }
 
   /**
@@ -84,14 +89,24 @@ export class Component {
 
     html = this.processChildPlaceholders(html)
 
-    return `<div id="${this.id}">${html}</div>`
+    return /* html */ `
+      <div
+        id="${this.id}"
+        ${resolveString(
+          this.className && `class="${resolveString(this.className)}"`
+        )}
+      >
+        ${html}
+      </div>
+      `
   }
 
   /**
    * @param {string} content
    */
   processChildPlaceholders(content) {
-    const placeholderRegex = /<component-placeholder\s+id="([^"]+)"[^>]*><\/component-placeholder>/g
+    const placeholderRegex =
+      /<component-placeholder\s+id="([^"]+)"[^>]*><\/component-placeholder>/g
 
     return content.replace(placeholderRegex, (_, childId) => {
       const childComponent = this.children.get(childId)
@@ -143,11 +158,14 @@ export class Component {
 
     if (!element) return
 
-    this.cleanupFunctions.forEach((fn) => {
+    this.cleanupFunctions.forEach((cleanup) => {
       try {
-        fn()
+        cleanup()
       } catch (error) {
-        console.error(`Error in cleanup function for component ${this.id}:`, error)
+        console.error(
+          `Error in cleanup function for component ${this.id}:`,
+          error
+        )
       }
     })
 
@@ -195,5 +213,14 @@ export class Component {
     this.unmount()
     element.outerHTML = this.toHTML()
     this.mount()
+  }
+
+  rerender() {
+    const element = document.getElementById(this.id)
+    if (!element) return
+
+    this.unmountChildren()
+    element.outerHTML = this.toHTML()
+    this.mountChildren()
   }
 }
