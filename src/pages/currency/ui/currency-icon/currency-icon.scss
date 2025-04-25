@@ -1,0 +1,45 @@
+@use '@styles/abstracts' as *;
+
+.currency-icon {
+  width: rem(32px);
+  height: rem(32px);
+
+  &-container {
+    position: relative;
+    width: rem(32px);
+    height: rem(32px);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 1;
+      width: 3px;
+      height: 100%;
+      content: '';
+      background-color: $color-white;
+      transform: translateX(-50%);
+    }
+  }
+
+  &-wrapper {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+
+    &:first-child {
+      left: 0;
+    }
+
+    &:last-child {
+      right: 0;
+
+      img {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}

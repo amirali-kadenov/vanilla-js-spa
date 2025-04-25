@@ -1,0 +1,25 @@
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+
+  &__content {
+    text-align: center;
+  }
+
+  &__icon {
+    margin-bottom: 16px;
+    font-size: 48px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+  }
+}

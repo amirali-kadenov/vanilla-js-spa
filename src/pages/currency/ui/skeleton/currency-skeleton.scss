@@ -1,0 +1,194 @@
+@use '@styles/abstracts' as *;
+@use 'sass:color';
+
+%shimmer {
+  background: linear-gradient(
+    90deg,
+    color.change($color-system-blue, $alpha: 0.05) 25%,
+    color.change($color-system-blue, $alpha: 0.1) 50%,
+    color.change($color-system-blue, $alpha: 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  display: flex;
+  gap: rem(24px);
+  width: 100%;
+  height: 100%;
+
+  &__rates,
+  &__converter {
+    height: calc(100dvh - 112px);
+    overflow-y: auto;
+    border-radius: 24px;
+  }
+
+  &__rates {
+    flex: 1;
+    overflow: hidden;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: rem(24px) rem(16px);
+      background-color: color.change($color-system-blue, $alpha: 0.05);
+      border-radius: 24px;
+    }
+
+    &-title,
+    &-date {
+      height: rem(32px);
+
+      @extend %shimmer;
+
+      border-radius: rem(8px);
+    }
+
+    &-title {
+      width: rem(200px);
+    }
+
+    &-date {
+      width: rem(150px);
+    }
+
+    &-data {
+      display: flex;
+      gap: rem(24px);
+      align-items: flex-start;
+      height: 100%;
+      margin-top: rem(24px);
+      overflow: hidden;
+    }
+
+    &-column {
+      flex: 1;
+      height: 100%;
+      overflow: hidden;
+
+      &-title {
+        width: rem(100px);
+        height: rem(24px);
+        margin-bottom: rem(16px);
+
+        @extend %shimmer;
+
+        border-radius: rem(8px);
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: rem(4px);
+      height: 100%;
+      padding: rem(24px);
+      margin-top: rem(24px);
+      background-color: color.change($color-system-blue, $alpha: 0.05);
+      border-radius: 24px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      height: rem(41px);
+
+      &-icon {
+        width: rem(24px);
+        height: rem(24px);
+
+        @extend %shimmer;
+
+        border-radius: 50%;
+      }
+
+      &-text {
+        width: 100%;
+        height: rem(24px);
+        margin-left: rem(12px);
+
+        @extend %shimmer;
+
+        border-radius: rem(8px);
+      }
+    }
+  }
+
+  &__converter {
+    min-width: rem(555px);
+    padding: rem(24px);
+    background-color: color.change($color-system-blue, $alpha: 0.1);
+
+    &-title {
+      width: rem(200px);
+      height: rem(32px);
+
+      @extend %shimmer;
+
+      border-radius: rem(8px);
+    }
+
+    &-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: rem(16px);
+      margin-top: rem(40px);
+    }
+
+    &-input {
+      display: flex;
+      align-items: center;
+
+      &-icon {
+        width: rem(24px);
+        height: rem(24px);
+
+        @extend %shimmer;
+
+        border-radius: 50%;
+      }
+
+      &-currency {
+        width: rem(60px);
+        height: rem(24px);
+        margin: 0 rem(26px) 0 rem(12px);
+
+        @extend %shimmer;
+
+        border-radius: rem(8px);
+      }
+
+      &-field {
+        flex: 1;
+        height: rem(40px);
+
+        @extend %shimmer;
+
+        border-radius: rem(8px);
+      }
+    }
+
+    &-add {
+      width: rem(120px);
+      height: rem(24px);
+      margin-top: rem(24px);
+
+      @extend %shimmer;
+
+      border-radius: rem(8px);
+    }
+  }
+}

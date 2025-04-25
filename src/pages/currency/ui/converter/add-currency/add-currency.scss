@@ -1,0 +1,13 @@
+@use '@styles/abstracts' as *;
+
+.add-currency {
+  display: flex;
+  gap: rem(4px);
+  align-items: center;
+  margin-top: rem(16px);
+  color: $color-system-blue;
+
+  &__text {
+    color: $color-system-blue;
+  }
+}

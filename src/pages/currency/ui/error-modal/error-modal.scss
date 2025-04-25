@@ -1,0 +1,8 @@
+@use '@styles/abstracts' as *;
+
+.error-modal {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  justify-content: center;
+}

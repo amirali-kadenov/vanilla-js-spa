@@ -1,0 +1,127 @@
+@use '@styles/abstracts' as *;
+@use 'sass:color';
+
+@mixin rates-container {
+  padding: rem(24px);
+  background-color: color.change($color-system-blue, $alpha: 0.08);
+  border-radius: 24px;
+}
+
+.rates {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(24px) rem(16px);
+    @include rates-container;
+  }
+
+  &__date {
+    color: $color-system-blue;
+  }
+
+  &__data {
+    display: flex;
+    gap: rem(24px);
+    align-items: flex-start;
+    max-height: calc(100dvh - 214px);
+    margin-top: rem(24px);
+    overflow: hidden auto;
+    border-radius: 24px;
+  }
+
+  &__data-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &-title {
+      font-weight: 400;
+      color: $color-primary-text;
+    }
+
+    &--no-title {
+      margin-top: rem(30px);
+    }
+  }
+
+  &__data-list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16px);
+    margin-top: rem(24px);
+
+    &-container {
+      margin-top: rem(16px);
+      @include rates-container;
+
+      &--multi {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      height: rem(41px);
+
+      &--truncate {
+        & > span {
+          max-width: rem(80px);
+          @include text-truncate;
+        }
+      }
+
+      &--name {
+        gap: rem(12px);
+      }
+    }
+
+    &-title {
+      color: $color-label-secondary;
+    }
+
+    &--name {
+      padding-right: rem(80px);
+    }
+
+    &--best-courses {
+      gap: rem(40px);
+    }
+
+    &--exchange {
+      gap: rem(32px);
+    }
+  }
+
+  &__rate-change {
+    &--positive {
+      color: $color-system-green;
+    }
+
+    &--negative {
+      color: $color-system-red;
+    }
+
+    &--date {
+      color: $color-label-tertiary;
+    }
+  }
+
+  &__currency-title {
+    display: flex;
+    gap: rem(12px);
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__currency-select-text {
+    font-weight: 700;
+    color: $color-system-blue;
+
+    &:hover {
+      color: $color-system-dark-blue;
+    }
+  }
+}

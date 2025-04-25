@@ -1,0 +1,6 @@
+@use '@styles/abstracts' as *;
+
+.currency {
+  display: flex;
+  gap: rem(40px);
+}

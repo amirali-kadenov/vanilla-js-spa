@@ -1,0 +1,47 @@
+@use '@styles/abstracts' as *;
+@use 'sass:color';
+
+.converter {
+  flex-grow: 1;
+  max-height: calc(100dvh - 112px);
+  padding: rem(40px);
+  overflow-y: auto;
+  background-color: color.change($color-system-blue, $alpha: 0.16);
+  border-radius: 40px;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16px);
+    margin-top: rem(40px);
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-section {
+      display: flex;
+      align-items: center;
+
+      &--right {
+        flex: 1;
+      }
+    }
+
+    &-element {
+      flex: 1;
+    }
+
+    &-currency {
+      margin-right: rem(26px);
+      margin-left: rem(12px);
+    }
+
+    &-delete-button {
+      margin-left: rem(6px);
+      color: $color-system-blue;
+    }
+  }
+}
