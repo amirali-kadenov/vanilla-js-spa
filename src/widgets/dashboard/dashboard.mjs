@@ -54,10 +54,8 @@ const DashboardLayout = new ProtectedRoute({
         </div>
 
         <main class="dashboard__content">
-          <div class="dashboard__content-wrapper">
-            <!-- -->
-            ${Router.createChildPlaceholder()}
-          </div>
+          <!-- -->
+          ${Router.createChildPlaceholder('dashboard__content-wrapper')}
         </main>
       </div>
   `
