@@ -127,7 +127,9 @@ export class Router {
       ? match.placeholder.toHTML()
       : '<div>Loading...</div>'
 
-    const layout = match.layout ? await Router.#resolveComponent(match.layout) : null
+    const layout = match.layout
+      ? await Router.#resolveComponent(match.layout)
+      : null
     const component = await Router.#resolveComponent(match.component)
 
     if (layout) {
@@ -171,7 +173,12 @@ export class Router {
    * @param {Component} [parentPlaceholder]
    * @returns {RouteMatch | null}
    */
-  static #findRouteComponent(path, routes = Router.#routes, parentLayout, parentPlaceholder) {
+  static #findRouteComponent(
+    path,
+    routes = Router.#routes,
+    parentLayout,
+    parentPlaceholder
+  ) {
     for (const route of routes) {
       if (!route.path) continue
 
@@ -224,5 +231,11 @@ export class Router {
    */
   static createChildPlaceholder() {
     return `<div id="${ROUTER_VIEW_ID}"></div>`
+  }
+
+  static renderActiveRoute = () => {
+    if (Router.#activeComponent) {
+      Router.#renderComponent(Router.#activeComponent)
+    }
   }
 }
