@@ -1,11 +1,11 @@
-@use './colors' as *;
-@use '../abstracts/functions' as *;
+@use '../abstracts' as *;
 
 /**
 * Regular font family
 */
 $font-family:
-  'SF Pro Display', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+  'SF Pro Display', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica',
+  'Arial', sans-serif !default;
 
 /**
 * Regular font size
@@ -31,4 +31,11 @@ h6,
 p {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+button {
+  padding-inline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
