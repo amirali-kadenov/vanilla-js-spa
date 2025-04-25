@@ -1,110 +1,163 @@
-import { Component } from '@/shared/model/component.mjs'
+import { resolveString } from '@/shared/lib/resolve-string.mjs'
 import './modal.scss'
 
 /**
- * @typedef {Object} ModalOptions
- * @property {string} content - The HTML content to display in the modal
+ * @typedef {() => void} Cleanup
  */
 
-const MODAL_CLASS = 'modal'
-const MODAL_VISIBLE_CLASS = 'modal--visible'
-export const MODAL_CLOSE_ATTRIBUTE = 'data-close-modal'
+/**
+ * @typedef {(this: Modal) => void | Cleanup} OnMount
+ */
 
-export class Modal extends Component {
-  modalRoot = document.getElementById('modal-root')
+/**
+ * @typedef {Object} ModalProps
+ * @property {() =>string} render - HTML string to be injected inside the modal
+ * @property {boolean} [closeOnBackdrop=true] - Whether to close modal on backdrop click
+ * @property {OnMount} [onMount] - Callback fired after modal mount. Can return cleanup function
+ * @property {boolean} [withCloseButton=true] - Whether to show close button
+ */
+
+/** Modal class constants */
+const MODAL_VISIBLE = 'modal--visible'
+const MODAL_CLOSE = 'modal__close'
+const MODAL_BACKDROP = 'modal-backdrop'
+
+/**
+ * Modal window management class
+ */
+export class Modal {
+  /** @type {number} Count of opened modals */
+  static openCount = 0
 
   /**
-   * @param {ModalOptions} props
+   * @param {ModalProps} props - Modal props
    */
-  constructor(props) {
-    super({
-      props,
-      render: () => {
-        this.renderInModalRoot()
-        return ''
-      },
-      onMount: () => {
-        if (!this.container) {
-          return
-        }
+  constructor({
+    render,
+    onMount,
+    closeOnBackdrop = true,
+    withCloseButton = true,
+  }) {
+    /** @type {() => string} function to render Modal HTML content */
+    this.render = render
 
-        const modal = this.container.querySelector(`.${MODAL_CLASS}`)
+    /** @type {boolean} Close on backdrop click flag */
+    this.closeOnBackdrop = closeOnBackdrop
 
-        if (!modal) {
-          return
-        }
+    /** @type {OnMount | undefined} Mount callback */
+    this.onMount = onMount
 
-        this.modal = modal
+    /** @type {Cleanup | null} Cleanup function */
+    this.cleanup = null
 
-        const handleClose = this.close.bind(this)
-        modal.addEventListener('click', handleClose)
+    /** @type {HTMLDivElement | null} Modal DOM element */
+    this.modal = null
 
-        return () => {
-          modal.removeEventListener('click', handleClose)
-          this.removeFromModalRoot()
-        }
-      },
-    })
+    this.isClosed = false
+
+    this.withCloseButton = withCloseButton
+
+    this.init()
   }
 
-  getModalHtml() {
-    return /* html */ `
-      <div class="modal">
-        <div class="modal__overlay" ${MODAL_CLOSE_ATTRIBUTE}></div>
-        <div class="modal__container">
-          <button class="modal__close-button" aria-label="Close modal" ${MODAL_CLOSE_ATTRIBUTE}>
-            &times;
-          </button>
-          <div class="modal__content">${this.props.content}</div>
-        </div>
+  /**
+   * Initialize modal window
+   * @private
+   */
+  init() {
+    const modal = document.createElement('div')
+    modal.className = 'modal'
+
+    modal.innerHTML = /* html */ `
+      <div class="modal__backdrop"></div>
+      <div class="modal__content">
+        ${resolveString(
+          this.withCloseButton &&
+            /* html */ `
+              <button
+                class="${MODAL_CLOSE}"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+        `
+        )}
+        ${this.render()}
       </div>
     `
-  }
 
-  renderInModalRoot() {
-    if (!this.modalRoot) {
-      return
+    this.modal = modal
+
+    const modalClose = modal.querySelector(`.${MODAL_CLOSE}`)
+
+    if (modalClose) {
+      modalClose.addEventListener('click', () => this.close())
     }
 
-    const container = document.createElement('div')
-    container.id = this.id
-    container.innerHTML = this.getModalHtml()
+    if (!this.closeOnBackdrop) return
 
-    this.container = container
-    this.modalRoot.appendChild(container)
-  }
+    const backdrop = modal.querySelector(`.${MODAL_BACKDROP}`)
 
-  removeFromModalRoot() {
-    if (!this.modalRoot || !this.container) {
-      return
-    }
+    if (!backdrop) return
 
-    this.modalRoot.removeChild(this.container)
-    this.container = null
-  }
-
-  /** @this {Modal} */
-  open() {
-    requestAnimationFrame(() => {
-      document.body.style.setProperty('overflow', 'hidden')
-      this.modal.classList.add(MODAL_VISIBLE_CLASS)
-    })
+    backdrop.addEventListener('click', () => this.close())
   }
 
   /**
-   * @this {Modal}
-   * @param {Event} e
+   * Open modal window and show backdrop
    */
-  close(e) {
-    const target = /** @type {HTMLElement | null} */ (e.target)
+  open() {
+    const root = document.getElementById('modal-root')
+    const modal = this.modal
 
-    if (!target?.hasAttribute(MODAL_CLOSE_ATTRIBUTE)) {
+    if (!root || !modal) {
+      console.warn('Modal root or backdrop not found in DOM.')
       return
     }
 
+    this.isClosed = false
+
+    root.appendChild(modal)
+
     requestAnimationFrame(() => {
-      document.body.style.removeProperty('overflow')
-      this.modal.classList.remove(MODAL_VISIBLE_CLASS)
+      modal.classList.add(MODAL_VISIBLE)
     })
+
+    if (!this.onMount) return
+
+    const cleanup = this.onMount()
+
+    if (typeof cleanup === 'function') {
+      this.cleanup = cleanup
+    }
+  }
+
+  /**
+   * Close modal window and manage backdrop visibility
+   */
+  close() {
+    const modal = this.modal
+
+    if (this.isClosed) return
+
+    this.isClosed = true
+
+    if (!modal) return
+
+    modal.classList.remove(MODAL_VISIBLE)
+
+    modal.addEventListener(
+      'transitionend',
+      () => {
+        if (modal.parentNode) {
+          modal.parentNode.removeChild(modal)
+        }
+
+        if (this.cleanup) {
+          this.cleanup()
+        }
+      },
+      { once: true }
+    )
   }
 }
