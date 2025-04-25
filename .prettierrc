@@ -1,5 +1,5 @@
 {
-  "printWidth": 100,
+  "printWidth": 80,
   "trailingComma": "es5",
   "arrowParens": "always",
   "bracketSpacing": true,
@@ -7,6 +7,9 @@
   "endOfLine": "auto",
   "tabWidth": 2,
   "singleQuote": true,
+  "bracketLine": true,
+  "proseWrap": "always",
+  "singleAttributePerLine": true,
   "plugins": [
     "prettier-plugin-embed"
   ],

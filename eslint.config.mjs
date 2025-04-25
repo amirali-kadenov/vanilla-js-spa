@@ -5,6 +5,7 @@ import prettierConfig from 'eslint-config-prettier/flat'
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import importPlugin from 'eslint-plugin-import'
+import { configs as litPluginConfigs } from 'eslint-plugin-lit'
 
 export default defineConfig([
   {
@@ -24,7 +25,14 @@ export default defineConfig([
       'import/order': [
         'error',
         {
-          groups: ['external', 'builtin', 'internal', 'parent', 'sibling', 'index'],
+          groups: [
+            'external',
+            'builtin',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
           pathGroups: [
             {
               pattern: '@/**',
@@ -37,6 +45,13 @@ export default defineConfig([
           },
         },
       ],
+    },
+  },
+  {
+    ...litPluginConfigs['flat/recommended'],
+    files: ['src/**/*.js', 'src/**/*.mjs'],
+    rules: {
+      'lit/no-invalid-html': 'warn',
     },
   },
   {
