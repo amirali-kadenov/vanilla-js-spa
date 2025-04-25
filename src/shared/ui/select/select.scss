@@ -1,0 +1,66 @@
+@use '@styles/abstracts' as *;
+
+// Select Component SCSS with BEM naming
+
+.select {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  font-family: sans-serif;
+  user-select: none;
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    min-width: rem(300px);
+    max-height: 0;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: $shadow-card;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+
+    &--open {
+      max-height: rem(400px);
+      overflow-y: auto;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &--top {
+      top: auto;
+      bottom: 100%;
+      transform: translateY(-10px);
+
+      &.select__menu--open {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__option {
+    padding: rem(16px) rem(24px);
+    font-size: rem(20px);
+    line-height: rem(25px);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+
+    &--selected {
+      font-weight: 500;
+      background-color: #e5e7eb;
+
+      &:hover {
+        background-color: #d1d5db;
+      }
+    }
+  }
+}
