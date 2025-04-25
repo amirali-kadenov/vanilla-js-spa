@@ -1,4 +1,4 @@
-@use '@styles' as *;
+@use '@styles/abstracts' as *;
 
 .login {
   @include flex-center;
@@ -13,43 +13,5 @@
 
   &__title {
     margin-bottom: rem(8);
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: rem(16);
-    margin-top: rem(40);
-  }
-
-  &__eye-icon {
-    display: none;
-    cursor: pointer;
-  }
-
-  &__input[data-has-value] {
-    ~ .input__icon {
-      svg:not(.login__eye-icon) {
-        color: $color-primary-text;
-      }
-
-      .login__eye-icon {
-        display: block;
-      }
-    }
-  }
-
-  &__icon {
-    &--active {
-      color: $color-primary-text;
-    }
-
-    &--inactive {
-      color: $color-label-tertiary;
-    }
-  }
-
-  &__error-message {
-    margin-bottom: rem(16);
   }
 }

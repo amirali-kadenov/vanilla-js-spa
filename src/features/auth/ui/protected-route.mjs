@@ -1,5 +1,5 @@
 import { Component } from '@/shared/model/component.mjs'
-import { checkAuth, logout } from './auth.mjs'
+import { Auth } from '../auth.mjs'
 
 /**
  * @template {Object} State
@@ -15,8 +15,8 @@ export class ProtectedRoute extends Component {
       initialState: options.initialState,
       render: options.render,
       onMount: (element) => {
-        if (!checkAuth()) {
-          logout()
+        if (!Auth.checkAuth()) {
+          return
         }
 
         const cleanup = options.onMount?.call(this, element)

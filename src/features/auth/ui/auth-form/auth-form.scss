@@ -1,0 +1,41 @@
+@use '@styles/abstracts' as *;
+
+.auth {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    margin-top: rem(40);
+  }
+
+  &__eye-icon {
+    display: none;
+    cursor: pointer;
+  }
+
+  &__input[data-has-value] {
+    ~ .input__icon {
+      svg:not(.auth__eye-icon) {
+        color: $color-primary-text;
+      }
+
+      .auth__eye-icon {
+        display: block;
+      }
+    }
+  }
+
+  &__icon {
+    &--active {
+      color: $color-primary-text;
+    }
+
+    &--inactive {
+      color: $color-label-tertiary;
+    }
+  }
+
+  &__error-message {
+    margin-bottom: rem(16);
+  }
+}

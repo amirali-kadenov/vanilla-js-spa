@@ -1,0 +1,8 @@
+@use '@styles/abstracts' as *;
+
+.stale-session {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  justify-content: center;
+}

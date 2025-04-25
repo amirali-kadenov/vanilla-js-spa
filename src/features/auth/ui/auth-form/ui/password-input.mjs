@@ -46,7 +46,7 @@ function render(props) {
       leftIcon: LockIcon(),
       rightIcon: EyeIcon({
         id: PASSWORD_ICON_ID,
-        className: 'login__eye-icon',
+        className: 'auth__eye-icon',
       }),
     })
   )

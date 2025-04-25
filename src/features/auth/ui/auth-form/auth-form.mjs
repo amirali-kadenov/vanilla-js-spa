@@ -1,23 +1,21 @@
 import { Component } from '@/shared/model/component.mjs'
 import { Button } from '@/shared/ui/button/button.mjs'
 import { Input } from '@/shared/ui/input/input.mjs'
-import { LOGIN_FORM_IDS, LOGIN_NO_ERRORS } from '../lib/constants.mjs'
-import { handleLoginSubmit } from '../model/handle-submit.mjs'
-import { EnvelopeIcon } from './icons/envelope.mjs'
-import { PasswordInput } from './password-input.mjs'
-
+import { LOGIN_FORM_IDS, LOGIN_NO_ERRORS } from './lib/constants.mjs'
+import { handleAuthFormSubmit } from './model/handle-submit.mjs'
+import { EnvelopeIcon } from './ui/icons/envelope.mjs'
+import { PasswordInput } from './ui/password-input.mjs'
+import './auth-form.scss'
 /**
- * @typedef {() => void} OnSubmitError
+ * @typedef {Object} Props
+ * @property {() => void} [onSuccess]
  */
 
-/**
- * @typedef {Object} LoginFormProps
- * @property {OnSubmitError} onSubmitError
- */
-
-export class LoginForm extends Component {
-  /** @param {LoginFormProps} props */
-  constructor({ onSubmitError }) {
+export class AuthForm extends Component {
+  /**
+   * @param {Props} [props]
+   */
+  constructor(props) {
     const render = () => {
       const emailInput = new Input({
         type: 'email',
@@ -27,12 +25,14 @@ export class LoginForm extends Component {
         error: this.state.errors.email,
         placeholder: 'Email',
         autocomplete: 'email',
-        className: 'login__input',
+        className: 'auth__input',
         leftIcon: EnvelopeIcon({
-          className: this.state.email ? 'login__icon--active' : 'login__icon--inactive',
+          className: this.state.email
+            ? 'auth__icon--active'
+            : 'auth__icon--inactive',
         }),
-        onInput: (e) => {
-          this.state.email = /** @type {HTMLInputElement} */ (e.target).value
+        onInput: (email) => {
+          this.state.email = email
         },
       })
 
@@ -42,16 +42,18 @@ export class LoginForm extends Component {
         id: LOGIN_FORM_IDS.PASSWORD,
         name: LOGIN_FORM_IDS.PASSWORD,
         autocomplete: 'password',
-        className: 'login__input',
-        onInput: (e) => {
-          this.state.password = /** @type {HTMLInputElement} */ (e.target).value
+        className: 'auth__input',
+        onInput: (password) => {
+          this.state.password = password
         },
       })
 
       return /* html */ `
-        <form class="login__form">
+        <form
+          class="auth__form"
+          autocomplete="on"
+        >
           ${Component.child(this, emailInput)}
-          <!-- -->
           ${Component.child(this, passwordInput)}
           ${Button({
             children: 'Login',
@@ -66,12 +68,13 @@ export class LoginForm extends Component {
     /** @param {HTMLElement} element */
     const onMount = (element) => {
       const form = element.querySelector('form')
+
       if (!form) return
 
       /** @param {SubmitEvent} e */
       const handleSubmit = (e) => {
         e.preventDefault()
-        handleLoginSubmit(this, onSubmitError)
+        handleAuthFormSubmit(this, props?.onSuccess)
       }
 
       form.addEventListener('submit', handleSubmit)

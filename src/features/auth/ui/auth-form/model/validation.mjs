@@ -15,7 +15,7 @@
  * @param {string=} password
  * @returns {ValidationResult}
  */
-export const validateLoginForm = (email, password) => {
+export const validateForm = (email, password) => {
   /** @type {Errors} */
   const errors = {
     email: null,
