@@ -19,6 +19,7 @@ import './button.scss'
  * @property {boolean} [disabled=false]
  * @property {string} [type="primary"]
  * @property {string} [dataAttributes]
+ * @property {string} [id]
  */
 
 /**
@@ -37,6 +38,7 @@ export const Button = (props) => {
       type="${props.type ?? 'button'}"
       ${props.disabled ? 'disabled' : ''}
       ${resolveString(props.dataAttributes)}
+      ${resolveString(props.id && `id="${props.id}"`)}
     >
       ${props.children}
     </button>
