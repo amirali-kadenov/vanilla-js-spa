@@ -1,5 +1,7 @@
 /** @typedef {import('@/shared/model/component.mjs').Component<any, any>} Component */
 
+import { resolveString } from '../lib/resolve-string.mjs'
+
 /**
  * @typedef {() => Promise<Component>} LazyComponent
  * A function that returns a Promise resolving to a Component.
@@ -227,10 +229,11 @@ export class Router {
 
   /**
    * Creates the placeholder element for rendering child routes within a layout.
+   * @param {string} className - The class name for the placeholder element.
    * @returns {string} - The HTML string for the placeholder element.
    */
-  static createChildPlaceholder() {
-    return `<div id="${ROUTER_VIEW_ID}"></div>`
+  static createChildPlaceholder(className) {
+    return `<div ${resolveString(className && `class="${className}"`)} id="${ROUTER_VIEW_ID}"></div>`
   }
 
   static renderActiveRoute = () => {
