@@ -15,12 +15,24 @@ export function onInputMount(element) {
     toggleHasValue(input, target?.value)
 
     if (this.props.onInput) {
-      this.props.onInput(e)
+      this.props.onInput(target?.value)
+    }
+  }
+  /** @param {Event} e */
+  const handleChange = (e) => {
+    const target = /** @type {HTMLInputElement | null} */ (e.target)
+
+    if (this.props.onChange) {
+      this.props.onChange(target?.value)
     }
   }
 
+  input.addEventListener('change', handleChange)
   input.addEventListener('input', handleInput)
-  return () => input.removeEventListener('input', handleInput)
+  return () => {
+    input.removeEventListener('change', handleChange)
+    input.removeEventListener('input', handleInput)
+  }
 }
 
 /**

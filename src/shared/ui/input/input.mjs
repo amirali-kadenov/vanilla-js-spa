@@ -4,17 +4,24 @@ import { renderInput } from './ui.mjs'
 import './input.scss'
 
 /**
+ * @typedef {(value: string | undefined) => void} OnInput
+ * @typedef {(value: string | undefined) => void} OnChange
+ */
+
+/**
  * @typedef {Object} InputProps
  * @property {string} [type='text']
- * @property {string} placeholder
+ * @property {string} [placeholder]
  * @property {string} name
  * @property {string} id
- * @property {string} [value]
+ * @property {string | number} [value]
  * @property {string | null} [error]
  * @property {string} [leftIcon]
  * @property {string} [rightIcon]
- * @property {(e: Event) => void} [onInput]
+ * @property {OnInput} [onInput]
+ * @property {OnChange} [onChange]
  * @property {string} [className]
+ * @property {string} [elementClassName]
  * @property {string} [autocomplete='off']
  */
 
@@ -29,6 +36,7 @@ export class Input extends Component {
   constructor(props) {
     super({
       props,
+      className: props.elementClassName,
       render: renderInput,
       onMount: onInputMount,
     })

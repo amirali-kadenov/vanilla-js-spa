@@ -22,7 +22,8 @@ export const renderInput = ({
     value && `value="${value}"`,
     value && `${DATA_HAS_VALUE_ATTRIBUTE}="true"`,
     error && `aria-describedby="${errorId}"`,
-    autocomplete && `autocomplete="${autocomplete}"`
+    autocomplete && `autocomplete="${autocomplete}"`,
+    placeholder && `placeholder="${placeholder}"`
   )
 
   const resolvedClassName = resolveString(
@@ -34,23 +35,20 @@ export const renderInput = ({
   )
 
   return /* html */ `
-    <div>
-      <div class="input__wrapper">
-        <input
-          type="${type}"
-          name="${name}"
-          id="${id}"
-          placeholder="${placeholder}"
-          class="${resolvedClassName}"
-          ${optionalAttributes}
-        />
+    <div class="input__wrapper">
+      <input
+        type="${type}"
+        name="${name}"
+        id="${id}"
+        class="${resolvedClassName}"
+        ${optionalAttributes}
+      />
 
-        ${leftIcon ? InputIcon(leftIcon, 'input__icon--left') : ''}
-        ${rightIcon ? InputIcon(rightIcon, 'input__icon--right') : ''}
-      </div>
-
-      ${error ? InputError(error, errorId) : ''}
+      ${leftIcon ? InputIcon(leftIcon, 'input__icon--left') : ''}
+      ${rightIcon ? InputIcon(rightIcon, 'input__icon--right') : ''}
     </div>
+
+    ${error ? InputError(error, errorId) : ''}
   `
 }
 
@@ -60,8 +58,11 @@ export const renderInput = ({
  */
 const InputError = (error, id) => {
   return /* html */ `
-    <div class="input__error" id="${id}">
-        ${error}
+    <div
+      class="input__error"
+      id="${id}"
+    >
+      ${error}
     </div>
   `
 }
@@ -72,8 +73,10 @@ const InputError = (error, id) => {
  */
 export const InputIcon = (icon, className) => {
   return /* html */ `
-    <div class="${resolveString('input__icon', className)}">
-        ${icon}
+    <div
+      class="${resolveString('input__icon', className)}"
+    >
+      ${icon}
     </div>
   `
 }
