@@ -6,7 +6,6 @@
 /**
  * @template T
  * @typedef {() => T} Getter
- * @property {Subscribe<T>} subscribe
  */
 
 /**
@@ -30,7 +29,7 @@
  *
  * @template T
  * @param {T} initialValue - The initial value of the signal.
- * @returns {[Getter<T> , Setter<T>]} A tuple of [getter, setter].
+ * @returns {[Getter<T> & { subscribe: Subscribe<T> }, Setter<T>]} A tuple of [getter, setter].
  *
  * The getter has a `subscribe` method:
  *   getter.subscribe((value: T) => void): () => void

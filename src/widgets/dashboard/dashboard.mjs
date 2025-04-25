@@ -1,4 +1,4 @@
-import { ProtectedRoute } from '@/features/auth/protected-route.mjs'
+import { ProtectedRoute } from '@/features/auth/ui/protected-route.mjs'
 import { PATHS } from '@/shared/config/paths.mjs'
 import { Component } from '@/shared/model/component.mjs'
 import { Router } from '@/shared/model/router.mjs'
@@ -40,8 +40,8 @@ const DashboardLayout = new ProtectedRoute({
               </li>
               <li>
                 ${NavLink({
-                  children: `${HourglassIcon()} Sand Timer`,
-                  href: PATHS.SAND_CLOCK,
+                  children: `${HourglassIcon()} Timer`,
+                  href: PATHS.TIMER,
                 })}
               </li>
             </ul>

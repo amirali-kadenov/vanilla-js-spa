@@ -15,10 +15,10 @@ export async function lazyLoad(componentPath) {
   }
 
   await new Promise((res) => setTimeout(res, 1000))
-  // @vite-ignore
   // Resolve the component and store it in the cache
-  const imported = await import(componentPath)
+  const imported = await import(/* @vite-ignore */ componentPath)
   const component = imported.default
+
   cacheMap.set(componentPath, component)
 
   return component

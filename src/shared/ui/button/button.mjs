@@ -51,7 +51,10 @@ export const ButtonLink = (props) => {
   const resolvedClassName = resolveString(buttonClassName, 'button--link')
 
   return /* html */ `
-    <a href="${props.href}" class="${resolvedClassName}">
+    <a
+      href="${props.href}"
+      class="${resolvedClassName}"
+    >
       ${props.children}
     </a>
   `

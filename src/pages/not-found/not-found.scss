@@ -1,4 +1,4 @@
-@use '@styles' as *;
+@use '@styles/abstracts' as *;
 
 .not-found {
   @include flex-center;

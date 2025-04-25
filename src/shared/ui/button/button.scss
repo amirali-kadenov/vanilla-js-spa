@@ -1,12 +1,10 @@
-@use '@styles' as *;
+@use '@styles/abstracts' as *;
 
 .button {
   padding: rem(14px) rem(20px);
   font-size: rem(17px);
   font-weight: 400;
   line-height: rem(22px);
-  cursor: pointer;
-  border: none;
   border-radius: 100px;
   transition: all 0.2s ease;
 

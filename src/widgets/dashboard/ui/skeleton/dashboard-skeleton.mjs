@@ -16,7 +16,15 @@ export const DashboardSkeleton = new Component({
           </nav>
         </div>
         <div class="dashboard-loading__content">
-          <div class="dashboard-loading__content-wrapper"></div>
+          <div class="dashboard-loading__content-wrapper">
+            <div class="dashboard-loading__title"></div>
+            <div class="dashboard-loading__cards">
+              <div class="dashboard-loading__card"></div>
+              <div class="dashboard-loading__card"></div>
+              <div class="dashboard-loading__card"></div>
+            </div>
+            <div class="dashboard-loading__chart"></div>
+          </div>
         </div>
       </div>
     `
