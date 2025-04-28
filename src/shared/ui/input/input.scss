@@ -26,6 +26,10 @@
     border-color: $color-system-red;
   }
 
+  &--disabled {
+    color: $color-label-tertiary;
+  }
+
   &--with-left-icon {
     padding-left: rem(56);
   }

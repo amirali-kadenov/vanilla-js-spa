@@ -16,6 +16,7 @@ export const renderInput = ({
   className,
   maxLength,
   autocomplete = 'off',
+  disabled,
 }) => {
   const errorId = `${id}-error`
 
@@ -25,12 +26,14 @@ export const renderInput = ({
     error && `aria-describedby="${errorId}"`,
     autocomplete && `autocomplete="${autocomplete}"`,
     placeholder && `placeholder="${placeholder}"`,
-    maxLength && `maxlength="${maxLength}"`
+    maxLength && `maxlength="${maxLength}"`,
+    disabled && 'disabled'
   )
 
   const resolvedClassName = resolveString(
     'input',
     error && 'input--error',
+    disabled && 'input--disabled',
     leftIcon && 'input--with-left-icon',
     rightIcon && 'input--with-right-icon',
     className

@@ -24,6 +24,7 @@ import './input.scss'
  * @property {string} [elementClassName]
  * @property {string} [autocomplete='off']
  * @property {number} [maxLength]
+ * @property {boolean} [disabled]
  */
 
 /**
