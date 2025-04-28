@@ -1,5 +1,7 @@
 # Test Task Application
 
+https://www.figma.com/file/arpbmkEi4cLo3SdzsHHi7o
+
 Application with main features:
 - Timer
 - Video Player
