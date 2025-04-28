@@ -11,13 +11,14 @@ import { applyInputMask } from '../lib.mjs'
  * @property {string} className
  * @property {string} label
  * @property {number} inputMaxValue
+ * @property {boolean} disabled
  */
 
 export class TimerInput extends Component {
   /**
    * @param {TimerInputProps} props
    */
-  constructor({ name, timer, className, label, inputMaxValue }) {
+  constructor({ name, timer, className, label, inputMaxValue, disabled }) {
     super({
       render: () => {
         return /* html */ `
@@ -33,6 +34,7 @@ export class TimerInput extends Component {
                   timer.state[name] === null ? '' : String(timer.state[name]),
                 maxLength: 2,
                 placeholder: '00',
+                disabled,
                 onChange: (value) => {
                   timer.setState({
                     ...timer.state,
