@@ -39,7 +39,11 @@ const Timer = new Component({
       this.state.seconds
     )
 
-    const percentage = ((currentTime / this.state.setTime) * 100).toFixed(2)
+    const percentageValue = (currentTime / this.state.setTime) * 100
+    const percentage = Number.isNaN(percentageValue)
+      ? 0
+      : percentageValue.toFixed(2)
+    const resolvedPercentage = this.state.isRunning ? percentage : 0
 
     return /* html */ `
         ${Typography({
@@ -60,13 +64,13 @@ const Timer = new Component({
                   /*html */ `<div class="timer__sandglass-drip"></div>`
               )}
               <div
-                style="--percentage: ${percentage || 0}%"
+                style="--percentage: ${resolvedPercentage}%"
                 class="timer__sandglass-sand timer__sandglass-sand--top"
               >
                 <div class="timer__sandglass-sand-inner"></div>
               </div>
               <div
-                style="--percentage: ${this.state.setTime ? percentage : 100}%"
+                style="--percentage: ${resolvedPercentage}%"
                 class="timer__sandglass-sand timer__sandglass-sand--bottom"
               >
                 <div class="timer__sandglass-sand-inner"></div>
@@ -85,6 +89,7 @@ const Timer = new Component({
                 className: 'timer__input--hours',
                 label: 'Hours',
                 inputMaxValue: 23,
+                disabled: this.state.isRunning,
               })
             )}
             ${Component.child(
@@ -95,6 +100,7 @@ const Timer = new Component({
                 className: 'timer__input--minutes',
                 label: 'Minutes',
                 inputMaxValue: 59,
+                disabled: this.state.isRunning,
               })
             )}
             ${Component.child(
@@ -105,6 +111,7 @@ const Timer = new Component({
                 className: 'timer__input--seconds',
                 label: 'Seconds',
                 inputMaxValue: 59,
+                disabled: this.state.isRunning,
               })
             )}
           </div>
